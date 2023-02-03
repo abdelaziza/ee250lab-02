@@ -11,7 +11,16 @@ def main():
     # TODO: Create a socket and connect it to the server at the designated IP and port
     # TODO: Get user input and send it to the server using your TCP socket
     # TODO: Receive a response from the server and close the TCP connection
-    pass
+
+    HOST = "172.20.10.10"  # The server's hostname or IP address
+    PORT = 8005  # The port used by the server
+
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((HOST, PORT))
+        s.sendall(b"Hello, world")
+        data = s.recv(1024)
+        data = data.decode("UTF-8")
+    print(f"Received {data!r}")
 
 
 if __name__ == '__main__':

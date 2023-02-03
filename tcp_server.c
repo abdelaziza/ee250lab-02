@@ -1,5 +1,5 @@
 /* A simple server in the internet domain using TCP
- * Answer the questions below in your writeup
+ * Answer the questions below in your writeup (questions erased as they're answered in the README file)
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,19 +17,12 @@ void error(const char *msg)
 
 int main(int argc, char *argv[])
 {
-    /* 1. What is argc and *argv[]?
-     *
-     */
+   
     int sockfd, newsockfd, portno;
-    /* 2. What is a UNIX file descriptor and file descriptor table?
-     *
-     */
+    
     socklen_t clilen;
 
     struct sockaddr_in serv_addr, cli_addr;
-    /* 3. What is a struct? What's the structure of sockaddr_in?
-     *
-     */
     
     int n;
     if (argc < 2) {
@@ -38,9 +31,6 @@ int main(int argc, char *argv[])
     }
     
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    /* 4. What are the input parameters and return value of socket()
-     *
-     */
     
     if (sockfd < 0) 
        error("ERROR opening socket");
@@ -53,25 +43,16 @@ int main(int argc, char *argv[])
     if (bind(sockfd, (struct sockaddr *) &serv_addr,
              sizeof(serv_addr)) < 0) 
              error("ERROR on binding");
-    /* 5. What are the input parameters of bind() and listen()?
-     *
-     */
     
     listen(sockfd,5);
     clilen = sizeof(cli_addr);
     
     while(1) {
-        /* 6.  Why use while(1)? Based on the code below, what problems might occur if there are multiple simultaneous connections to handle?
-        *
-        */
         
 	char buffer[256];
         newsockfd = accept(sockfd, 
                     (struct sockaddr *) &cli_addr, 
                     &clilen);
-	/* 7. Research how the command fork() works. How can it be applied here to better handle multiple connections?
-         * 
-         */
         
 	if (newsockfd < 0) 
              error("ERROR on accept");
@@ -90,6 +71,3 @@ int main(int argc, char *argv[])
     return 0; 
 }
   
-/* This program makes several system calls such as 'bind', and 'listen.' What exactly is a system call?
- *
- */
